@@ -13,6 +13,11 @@ export const authOptions = {
         })
         //add more providers here
     ],
+
+    jwt: {
+        secret: process.env.AUTH_SECRET,
+        encryption: true,
+    },
 }
 
 export default NextAuth(authOptions)
