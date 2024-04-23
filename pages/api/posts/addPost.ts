@@ -15,11 +15,9 @@ export default async function handler(
         //     // Include other properties if they are needed for session validation
         // };
 
-        const session = await getServerSession(req, res, authOptions);
+        const session = await getServerSession(req as any, res as any, authOptions as any);
         if (!session) {
             return res.status(401).json({ message: "Please log in" });
-
-
         }
         else {
             const title: string = req.body.title;
@@ -29,7 +27,6 @@ export default async function handler(
                 where: {
                     email: session?.user?.email,
                 },
-
             })
 
             //check title

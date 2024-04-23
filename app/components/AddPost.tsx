@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 export default function createPost() {
     const [title, setTitle] = useState('')
     const [isDisabled, setIsDisabled] = useState(false)
+    const queryClient = useQueryClient()
     let toastPostID: string
 
     //Unlike queries, mutations are typically used to create/update/delete data 
@@ -28,6 +29,7 @@ export default function createPost() {
 
         onSuccess: (data) => {
             toast.success("Post has been made 🔥", { id: toastPostID });
+            queryClient.invalidateQueries(["posts"]) //React Query will trigger a refetch to ensure the components have the most recent data.
             setTitle('')
             setIsDisabled(false)
         },
@@ -40,8 +42,6 @@ export default function createPost() {
         mutate(title)
 
     }
-
-
 
     return (
         <form onSubmit={submitPost} className='bg-white my-8 p-8 rounded-md'>
