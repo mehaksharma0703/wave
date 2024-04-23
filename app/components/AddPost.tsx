@@ -29,7 +29,7 @@ export default function createPost() {
 
         onSuccess: (data) => {
             toast.success("Post has been made 🔥", { id: toastPostID });
-            queryClient.invalidateQueries(["posts"]) //React Query will trigger a refetch to ensure the components have the most recent data.
+            queryClient.invalidateQueries({ queryKey: ["posts"] }) //React Query will trigger a refetch to ensure the components have the most recent data.
             setTitle('')
             setIsDisabled(false)
         },

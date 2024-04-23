@@ -35,7 +35,7 @@ export default function EditPost({ avatar, name, title, comments, id }: EditProp
         },
         onSuccess: (data) => {
             toast.success('Post has been deleted', { id: deleteToastID })
-            queryClient.invalidateQueries(["auth-posts"])
+            queryClient.invalidateQueries({ queryKey: ["auth-posts"] })
         },
     }
     )
